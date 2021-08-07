@@ -31,9 +31,13 @@ namespace ApmDashBoard
 		{
 			try
 			{
-
-				var output = cli.CreateCommand(operation).Execute();
-				Console.WriteLine($"Output : {output}");
+                while (true)
+                {
+					var output = cli.CreateCommand(operation).Execute();
+					Console.WriteLine($"Output : {output}");
+					Console.WriteLine("=========");
+					Thread.Sleep(200);
+                }
 
 			}
 			catch (Exception ex)
@@ -56,7 +60,8 @@ namespace ApmDashBoard
 			var con = new ConnectionInfo("13.125.52.86", 22, "chulhee", methods.ToArray());
 
 			var cli = Connect_SSH(con);
-			recvCommSSHData(cli, "ps -eo user,pid,ppid,rss,size,vsize,pmem,pcpu,time,cmd --sort -rss | head -n 11");
+			recvCommSSHData(cli, "ps -eo user,pid,ppid,rss,size,vsize,pmem,pcpu,time,cmd --sort -rss | head -n 5");
+
 		}
 	}
 }
